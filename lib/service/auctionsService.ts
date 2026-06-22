@@ -1,6 +1,6 @@
 const BASE_URL = process.env.DARKBAY_API_URL;
 
-export type AuctionRequest = {
+export type Auction = {
   id: number;
   title: string;
   description: string;
@@ -13,13 +13,19 @@ export type AuctionRequest = {
 };
 
 export const auctionsService = {
-  async getAuctions() {
-    const auctions = await fetch(`${BASE_URL}/auctions`, {
+  async getAuctions(params: { page: string; status?: string; minPrice?: string }) {
+    const searchParams = new URLSearchParams();
+
+    if (params.page) searchParams.append("page", params.page);
+    if (params.status) searchParams.append("status", params.status);
+    if (params.minPrice) searchParams.append("minPrice", params.minPrice);
+
+    const res = await fetch(`${BASE_URL}/auctions?${searchParams.toString()}`, {
       next: { revalidate: 60 },
     });
     
-    if (!auctions.ok) throw new Error("Failed to fetch auctions");
-    return auctions.json();
+    if (!res.ok) throw new Error("Failed to fetch auctions");
+    return res.json();
   },
 
   async getAuctionById(id: number) {
