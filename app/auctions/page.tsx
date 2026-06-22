@@ -1,5 +1,6 @@
 import { Auction, auctionsService } from "@/lib/service/auctionsService";
 import { AuctionCard } from "./components/AuctionCard";
+import { AuctionFilters } from "./components/AuctionFilters";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -10,6 +11,7 @@ export default async function AuctionsPage({
 }) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+  const status = params.status || 'open';
 
   const { data, meta } = await auctionsService.getAuctions({
     page: currentPage.toString(),
@@ -24,7 +26,7 @@ export default async function AuctionsPage({
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Auctions</h1>
-
+      <AuctionFilters />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {data.map((auction: Auction) => (
           <AuctionCard key={auction.id} auction={auction} />
