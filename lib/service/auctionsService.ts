@@ -12,6 +12,17 @@ export type Auction = {
   createdAt: Date;
 };
 
+export type Offer = {
+  id: number;
+  buyer: Buyer;
+  bidPrice: number;
+  createdAt: string;
+}
+
+export type Buyer = {
+  username: string;
+}
+
 export const auctionsService = {
   async getAuctions(params: { page: string; status?: string; minPrice?: string; maxPrice?: string }) {
     const searchParams = new URLSearchParams();
