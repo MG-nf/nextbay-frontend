@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-export function AuctionFilters() {
+export function AuctionStatusFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
