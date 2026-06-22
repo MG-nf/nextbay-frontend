@@ -3,6 +3,7 @@ import { AuctionCard } from "./components/AuctionCard";
 import { AuctionFilters } from "./components/AuctionFilters";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Pagination } from "./components/Pagination";
 
 export default async function AuctionsPage({
   searchParams,
@@ -33,27 +34,10 @@ export default async function AuctionsPage({
         ))}
       </div>
 
-      <div className="flex gap-4 mt-10 items-center justify-center">
-        {currentPage > 1 ? (
-          <Link href={`/auctions?page=${currentPage - 1}`} className="px-4 py-2 border rounded">
-            Previous
-          </Link>
-        ) : (
-          <span className="px-4 py-2 text-gray-400 cursor-not-allowed">Previous</span>
-        )}
-
-        <span className="font-medium">
-          Page {currentPage} of {meta.totalPages}
-        </span>
-
-        {currentPage < meta.totalPages ? (
-          <Link href={`/auctions?page=${currentPage + 1}`} className="px-4 py-2 border rounded">
-            Next
-          </Link>
-        ) : (
-          <span className="px-4 py-2 text-gray-400 cursor-not-allowed">Next</span>
-        )}
-      </div>
+      <Pagination 
+        totalPages={meta.totalPages} 
+        currentPage={currentPage} 
+      />
     </main>
   );
 }
