@@ -23,6 +23,12 @@ export async function Header() {
           >
             Auctions
           </Link>
+          <Link 
+            href="/auctions/new" 
+            className="px-4 py-1.5 rounded-md bg-muted text-muted-foreground hover:bg-muted/80 transition-all font-medium text-sm"
+          >
+            New Auction
+          </Link>
         </nav>
 
         <div className="flex gap-4 items-center">

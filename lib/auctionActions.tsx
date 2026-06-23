@@ -17,7 +17,8 @@ export async function createAuctionAction(prevState: any, formData: FormData) {
   });
 
   if (!res.ok) {
-    return { error: "Failed to create auction." };
+    const errorData = await res.json().catch(() => ({ message: "Failed to create auction." }));
+    return { error: errorData.message };
   }
 
   revalidatePath("/auctions");
