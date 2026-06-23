@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
+import { OfferForm } from "../components/OfferForm";
 
 export default async function AuctionDetailPage({
   params,
@@ -77,6 +78,7 @@ export default async function AuctionDetailPage({
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold mb-4">€{auction.currentPrice}</div>
+            <OfferForm auctionId={auction.id.toString()} />
           </CardContent>
         </Card>
       </div>
