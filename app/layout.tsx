@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Sans, Public_Sans } from "next/font/google";
-import { Header } from "@/components/header";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Header } from "@/components/Header";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const publicSansHeading = Public_Sans({subsets:['latin'],variable:'--font-heading'});
 
@@ -29,10 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", dmSans.variable, publicSansHeading.variable)}>
-      <body suppressHydrationWarning={true}>
-        <Header />
-        {children}
+    <html lang="en" className={cn("font-sans", dmSans.variable, publicSansHeading.variable)} suppressHydrationWarning={true}>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

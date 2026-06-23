@@ -8,7 +8,6 @@ export function AuctionPriceFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Initialize state from URL, or default to 0-10000
   const [range, setRange] = useState<number[]>([
     Number(searchParams.get("minPrice")) || 0,
     Number(searchParams.get("maxPrice")) || 10000,
@@ -25,7 +24,7 @@ export function AuctionPriceFilter() {
   };
 
   return (
-    <div className="p-6 border rounded-lg bg-white shadow-sm space-y-4 mb-6">
+    <div className="p-6 border rounded-lg bg-background shadow-sm space-y-4 mb-6">
       <div className="flex justify-between text-sm font-medium">
         <span>€{range[0]}</span>
         <span>€{range[1]}</span>
