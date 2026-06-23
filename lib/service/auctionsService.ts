@@ -1,6 +1,5 @@
 import { getAuctionStatus } from "../utils";
-
-const BASE_URL = process.env.DARKBAY_API_URL;
+import { fetchAPI } from "@/lib/api";
 
 export type Auction = {
   id: number;
@@ -45,7 +44,7 @@ export const auctionsService = {
     if (params.minPrice) searchParams.append("minPrice", params.minPrice);
     if (params.maxPrice) searchParams.append("maxPrice", params.maxPrice);
 
-    const res = await fetch(`${BASE_URL}/auctions?${searchParams.toString()}`, {
+    const res = await fetchAPI(`/auctions?${searchParams.toString()}`, {
       next: { revalidate: 60 },
     });
     
@@ -63,7 +62,7 @@ export const auctionsService = {
   },
 
   async getAuctionById(id: number) {
-    const auction = await fetch(`${BASE_URL}/auctions/${id}`);
+    const auction = await fetchAPI(`/auctions/${id}`);
     if (!auction.ok) throw new Error("Auction not found");
     const data: Auction = await auction.json();
     return {
