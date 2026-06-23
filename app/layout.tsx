@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Sans, Public_Sans } from "next/font/google";
+import { Header } from "@/components/header";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", dmSans.variable, publicSansHeading.variable)}>
       <body suppressHydrationWarning={true}>
+        <Header />
         {children}
       </body>
     </html>
