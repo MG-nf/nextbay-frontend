@@ -8,19 +8,16 @@ export function AuctionStatusFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const isChecked = searchParams.get("status") === "closed";
+  const currentStatus = searchParams.get("status") || "open";
+  const isChecked = currentStatus === "closed";
 
   const toggleStatus = (checked: boolean) => {
     const params = new URLSearchParams(searchParams.toString());
     
-    if (checked) {
-      params.set("status", "closed");
-    } else {
-      params.delete("status");
-    }
-    
+    params.set("status", checked ? "closed" : "open");
     params.set("page", "1");
-    router.push(`/auctions?${params.toString()}`);
+    
+    router.replace(`/auctions?${params.toString()}`);
   };
 
   return (
@@ -30,7 +27,9 @@ export function AuctionStatusFilter() {
         checked={isChecked}
         onCheckedChange={toggleStatus}
       />
-      <Label htmlFor="status-toggle">Show closed auctions</Label>
+      <Label htmlFor="status-toggle">
+        {isChecked ? "Showing closed auctions" : "Showing open auctions"}
+      </Label>
     </div>
   );
 }
