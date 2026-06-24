@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Sans, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Header } from "../components/Header";
+import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const publicSansHeading = Public_Sans({subsets:['latin'],variable:'--font-heading'});
