@@ -1,11 +1,13 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    resolveAlias: {
-      '@/components': './components', // adjust path as needed
-      '@/lib': './lib',
-    },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname, "."),
+    };
+    return config;
   },
 };
 
